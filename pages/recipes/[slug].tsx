@@ -15,6 +15,9 @@ const contentfulClient = createClient({
 
 function Recipe({ recipe }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
+
+  if (router.isFallback) return <Skeleton />;
+  
   const {
     cookingTime,
     featuredImage: {
@@ -31,8 +34,6 @@ function Recipe({ recipe }: InferGetStaticPropsType<typeof getStaticProps>) {
     method,
     title,
   } = recipe.fields;
-
-  if (router.isFallback) return <Skeleton />;
 
   return (
     <section>
