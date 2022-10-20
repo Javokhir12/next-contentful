@@ -40,5 +40,6 @@ export const getStaticProps: GetStaticProps<{
     props: {
       recipes: response.items ?? [],
     },
+    revalidate: 30,
   };
 };

@@ -84,5 +84,6 @@ export const getStaticProps: GetStaticProps<{ recipe: Entry<Recipe> }> = async (
     props: {
       recipe: response.items[0],
     },
+    revalidate: 30,
   };
 };
