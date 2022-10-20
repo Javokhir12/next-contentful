@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import styles from '../../styles/Recipe.module.css';
+import { useRouter } from 'next/router';
+import Skeleton from '../../components/Skeleton';
 
 const contentfulClient = createClient({
   space: process.env.CONTENTFUL_SPACE_ID!,
@@ -12,6 +14,7 @@ const contentfulClient = createClient({
 });
 
 function Recipe({ recipe }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
   const {
     cookingTime,
     featuredImage: {
@@ -28,6 +31,8 @@ function Recipe({ recipe }: InferGetStaticPropsType<typeof getStaticProps>) {
     method,
     title,
   } = recipe.fields;
+
+  if (router.isFallback) return <Skeleton />;
 
   return (
     <section>
@@ -66,7 +71,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
