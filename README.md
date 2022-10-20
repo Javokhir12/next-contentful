@@ -1,1 +1,6 @@
-## Recipe app built on top of The Net Ninja course using Next, TypeScript and Contentful.
+## Recipes app (credit: The Net Ninja)
+
+## Technologies
+- Next.js
+- TypeScript
+- Contentful CMS
