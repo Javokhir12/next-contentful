@@ -17,7 +17,7 @@ function Recipe({ recipe }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
 
   if (router.isFallback) return <Skeleton />;
-  
+
   const {
     cookingTime,
     featuredImage: {
@@ -85,6 +85,15 @@ export const getStaticProps: GetStaticProps<{ recipe: Entry<Recipe> }> = async (
     content_type: 'recipe',
     'fields.slug': slug,
   });
+
+  if (!response?.items?.length) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {
